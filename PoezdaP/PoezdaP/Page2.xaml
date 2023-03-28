@@ -1,13 +1,14 @@
-﻿<Window x:Class="PoezdaP.Window1"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PoezdaP"
-        mc:Ignorable="d"
-        Title="Window1" Height="450" Width="632">
+﻿<Page x:Class="PoezdaP.Page2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PoezdaP"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Page2">
 
-    <Grid RenderTransformOrigin="0.499,0.497" HorizontalAlignment="Center" Width="583">
+    <Grid RenderTransformOrigin="0.499,0.497" HorizontalAlignment="Center" Width="583" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="56"/>
             <RowDefinition/>
@@ -24,15 +25,13 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="DolhnostBtn" Content="Должности" Click="DolhnostBtn_Click" Margin="0,12,0,12"/>
         <Button x:Name="ProfileBtn" Grid.Column="1" Content="Профили" Margin="0,12,0,12" Click="ProfileBtn_Click"/>
-        <Button x:Name="TicketBtn" Grid.Column="2" Grid.ColumnSpan="3" Content="Билеты" Margin="0,12,0,12" />
+        <Button x:Name="TicketBtn" Grid.Column="2" Grid.ColumnSpan="3" Content="Билеты" Margin="0,12,0,12" Click="TicketBtn_Click"/>
         <DataGrid x:Name="TableGrid" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"/>
         <TextBox x:Name="NameDolhTB" Grid.Column="2" Grid.ColumnSpan="3" Text="Имя должности" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Height="40" Grid.Row="1"/>
         <TextBox x:Name="OcladTB" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="Оклад" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Height="40" Margin="0,33,0,0"/>
-                
         <Button x:Name="ChangeBtn" Grid.Row="2" Grid.Column="2" Content="Изм" Margin="0,2,0,1" Click="ChangeBtn_Click"/>
-        <Button x:Name="AllProfile" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Content="Все профили" Margin="0,2,0,40" VerticalAlignment="Bottom" Click="AllProfile_Click"/>
         <Button x:Name="AddBtn" Grid.Row="2" Grid.Column="3" Content="Добав" Margin="0,2,0,1" Click="AddBtn_Click"/>
         <Button x:Name="DeleteBtn" Grid.Row="2" Grid.Column="4" Content="Удал" Margin="0,2,0,1" Click="DeleteBtn_Click"/>
-        <Frame x:Name="MyFrame" Grid.RowSpan="4" Grid.ColumnSpan="5"/>
+        <Frame x:Name="MyFrame2" Grid.RowSpan="4" Grid.ColumnSpan="5"/>
     </Grid>
-</Window>
+</Page>

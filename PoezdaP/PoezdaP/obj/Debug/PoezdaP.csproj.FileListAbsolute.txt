@@ -30,3 +30,11 @@ C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Window1.baml
 C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Window2.baml
 C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page1.g.cs
 C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page1.baml
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page2.g.cs
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page2.baml
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page3.g.cs
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page3.baml
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page4.g.cs
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page4.baml
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page5.g.cs
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page5.baml

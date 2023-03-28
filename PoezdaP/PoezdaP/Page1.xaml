@@ -5,19 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PoezdaP"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page1">
+      d:DesignHeight="400" d:DesignWidth="800"
+      Title="Page1" Width="NaN" Height="NaN">
 
-    <Grid RenderTransformOrigin="0.499,0.497" HorizontalAlignment="Center" Width="800">
+    <Grid RenderTransformOrigin="0.499,0.497" HorizontalAlignment="Center" Width="583" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="56"/>
-            <RowDefinition/>
+            <RowDefinition Height="279*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="190"/>
+            <ColumnDefinition Width="190"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="67"/>
+            <ColumnDefinition Width="74"/>
+
+
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="Tablica" RenderTransformOrigin="0.542,0.525" Margin="0,0,10,0" Grid.ColumnSpan="2" Grid.Row="2" Width="NaN" Height="NaN" Grid.RowSpan="2"/>
+        <Button x:Name="DolhnostBtn" Content="Должности" Click="DolhnostBtn_Click" Margin="0,12,0,12"/>
+        <Button x:Name="ProfileBtn" Grid.Column="1" Content="Профили" Margin="0,12,0,12" Click="ProfileBtn_Click"/>
+        <Button x:Name="AllProfile" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Content="Все профили" Margin="0,2,0,40" VerticalAlignment="Bottom" Click="AllProfile_Click"/>
+        <Button x:Name="TicketBtn" Grid.Column="2" Grid.ColumnSpan="3" Content="Билеты" Margin="0,12,0,12" Click="TicketBtn_Click" />
+        <DataGrid x:Name="TableGrid" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3"/>
+        <TextBox x:Name="OneTbx" Grid.Column="2" Grid.ColumnSpan="3" Text="Login" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Height="40" Grid.Row="1"/>
+        <TextBox x:Name="TwoTbx" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="Password" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Height="40" Margin="0,33,0,0"/>
+        <TextBox x:Name="ThreeTbx" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="Dolhn" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Height="40" Margin="0,66,0,0"/>
+        <Button x:Name="ChangeBtn" Grid.Row="3" Grid.Column="2" Content="Изм" Margin="0,2,0,1" Click="ChangeBtn_Click"/>
+        <Button x:Name="AddBtn" Grid.Row="3" Grid.Column="3" Content="Добав" Margin="0,2,0,1" Click="AddBtn_Click"/>
+        <Button x:Name="DeleteBtn" Grid.Row="3" Grid.Column="4" Content="Удал" Margin="0,2,0,1" Click="DeleteBtn_Click"/>
+        <Frame x:Name="MyFrame" Grid.RowSpan="4" Grid.ColumnSpan="5"/>
     </Grid>
 </Page>

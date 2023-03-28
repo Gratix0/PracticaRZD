@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PoezdaP.RZDDataSetTableAdapters;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -13,44 +14,51 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PoezdaP.RZDDataSetTableAdapters;
 
 namespace PoezdaP
 {
     /// <summary>
-    /// Логика взаимодействия для Page1.xaml
+    /// Логика взаимодействия для Page3.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Page3 : Page
     {
         ProfileTableAdapter Login = new ProfileTableAdapter();
         DolhnostTableAdapter Dolhnost = new DolhnostTableAdapter();
-        public Page1()
+        ticketTableAdapter Ticket = new ticketTableAdapter();
+        public Page3()
         {
             InitializeComponent();
-            TableGrid.ItemsSource = Login.GetData();
+            TableGrid.ItemsSource = Ticket.GetData();
         }
+
 
         private void DolhnostBtn_Click(object sender, RoutedEventArgs e)
         {
-           
-            MyFrame.Content = new Page2();
-
+            MyFrame3.Content = new Page2();
         }
 
         private void ChangeBtn_Click(object sender, RoutedEventArgs e)
         {
-            object id = (TableGrid.SelectedItem as DataRowView).Row[0];
-            Login.UpdateQuery(OneTbx.Text, TwoTbx.Text, Convert.ToInt32(ThreeTbx.Text), Convert.ToInt32(id));
-
-            TableGrid.ItemsSource = Login.GetData();
+            try
+            {
+                object id = (TableGrid.SelectedItem as DataRowView).Row[0];
+                Ticket.UpdateQuery(NameDolhTB.Text, OcladTB.Text, OpicanieTB.Text, Convert.ToInt32(CostTB.Text), Convert.ToInt32(id));
+                TableGrid.ItemsSource = Ticket.GetData();
+            }
+            catch
+            {
+                MessageBox.Show("Введите корректные данные!");
+            }
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Login.InsertQuery(Convert.ToString(OneTbx.Text), Convert.ToString(TwoTbx.Text), Convert.ToInt32(ThreeTbx.Text));
-                TableGrid.ItemsSource = Login.GetData();
+                Convert.ToInt32(CostTB.Text);
+
+                Ticket.InsertQuery(Convert.ToString(NameDolhTB.Text), Convert.ToString(OcladTB.Text), Convert.ToString(OpicanieTB.Text), Convert.ToInt32(CostTB.Text));
+                TableGrid.ItemsSource = Ticket.GetData();
             }
             catch
             {
@@ -61,24 +69,16 @@ namespace PoezdaP
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             object id = (TableGrid.SelectedItem as DataRowView).Row[0];
-            Login.DeleteQuery(Convert.ToInt32(id));
-            TableGrid.ItemsSource = Login.GetData();
+            Ticket.DeleteQuery(Convert.ToInt32(id));
+            TableGrid.ItemsSource = Ticket.GetData();
 
         }
 
         private void ProfileBtn_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
+            MyFrame3.Content = new Page1();
 
-        private void TicketBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MyFrame.Content = new Page3();
-        }
 
-        private void AllProfile_Click(object sender, RoutedEventArgs e)
-        {
-            MyFrame.Content = new Page4();
 
         }
     }

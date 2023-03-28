@@ -22,6 +22,7 @@ namespace PoezdaP
         public Window2()
         {
             InitializeComponent();
+            MyFrame2.Content = new Page5();
         }
     }
 }

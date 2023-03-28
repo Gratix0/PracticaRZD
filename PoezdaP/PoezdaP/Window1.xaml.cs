@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +23,57 @@ namespace PoezdaP
     {
         ProfileTableAdapter Login = new ProfileTableAdapter();
         DolhnostTableAdapter Dolhnost = new DolhnostTableAdapter();
+        UserTableAdapter User = new UserTableAdapter();
         public Window1()
         {
             InitializeComponent();
-            Tablica.ItemsSource = Login.GetData();
+            TableGrid.ItemsSource = Dolhnost.GetData();
         }
 
         private void DolhnostBtn_Click(object sender, RoutedEventArgs e)
         {
-            Tablica.ItemsSource = Dolhnost.GetData();
+            TableGrid.ItemsSource = Dolhnost.GetData();
+        }
+
+        private void ChangeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            object id = (TableGrid.SelectedItem as DataRowView).Row[0];
+            Dolhnost.UpdateQuery(NameDolhTB.Text, Convert.ToInt32(OcladTB.Text), Convert.ToInt32(id));
+            TableGrid.ItemsSource = Dolhnost.GetData();
+        }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Convert.ToInt32(OcladTB.Text);
+
+                Dolhnost.InsertQuery(Convert.ToString(NameDolhTB.Text), Convert.ToInt32(OcladTB.Text));
+                TableGrid.ItemsSource = Dolhnost.GetData();
+            }
+            catch
+            {
+                MessageBox.Show("Введите корректные данные!");
+            }
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            object id = (TableGrid.SelectedItem as DataRowView).Row[0];
+            Dolhnost.DeleteQuery(Convert.ToInt32(id));
+            TableGrid.ItemsSource = Dolhnost.GetData();
+            
+        }
+
+        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Content = new Page1();
+            
+        }
+
+        private void AllProfile_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Content = new Page4();
         }
     }
 }
