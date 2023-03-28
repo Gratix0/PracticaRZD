@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,10 +51,16 @@ namespace PoezdaP
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            object id = (TableGrid.SelectedItem as DataRowView).Row[0];
-            object name = (TableGrid.SelectedItem as DataRowView).Row[1];
+            object id = (TableGrid.SelectedItem as DataRowView).Row[0]; Convert.ToInt32(id);
+            object name = (TableGrid.SelectedItem as DataRowView).Row[1]; Convert.ToString(name);
+            object price = (TableGrid.SelectedItem as DataRowView).Row[2]; Convert.ToInt32(price);
+            object cvo = (TableGrid.SelectedItem as DataRowView).Row[3]; Convert.ToInt32(cvo);
+            int total_price = (Convert.ToInt32(price) * Convert.ToInt32(cvo));
+
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string text = "        Чек\n" + $"     Кассовый чек №{id}\n" + $"{name}"; 
+            string text = "        Чек\n" + $"     Кассовый чек №{id}\n" + $"{name}     -    {price} - {cvo}\n" + $"Итого к оплате: {total_price}";
+
+            File.AppendAllText($"{path}\\{id}.txt", text);
         }
 
         private void Chek_Click(object sender, RoutedEventArgs e)

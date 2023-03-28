@@ -44,6 +44,10 @@ namespace PoezdaP {
         
         private UserDataTable tableUser;
         
+        private global::System.Data.DataRelation relationFK_basket_Profile;
+        
+        private global::System.Data.DataRelation relationFK_basket_ticket;
+        
         private global::System.Data.DataRelation relationFK_check_Profile;
         
         private global::System.Data.DataRelation relationFK_Date_Profile_Profile;
@@ -61,10 +65,6 @@ namespace PoezdaP {
         private global::System.Data.DataRelation relationFK_ticketDesc_Dolhnost;
         
         private global::System.Data.DataRelation relationFK_Ticket_Desc_Dolhnost;
-        
-        private global::System.Data.DataRelation relationFK_basket_ticket;
-        
-        private global::System.Data.DataRelation relationFK_basket_Profile;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -432,6 +432,8 @@ namespace PoezdaP {
                     this.tableUser.InitVars();
                 }
             }
+            this.relationFK_basket_Profile = this.Relations["FK_basket_Profile"];
+            this.relationFK_basket_ticket = this.Relations["FK_basket_ticket"];
             this.relationFK_check_Profile = this.Relations["FK_check_Profile"];
             this.relationFK_Date_Profile_Profile = this.Relations["FK_Date_Profile_Profile"];
             this.relationFK_History_check = this.Relations["FK_History_check"];
@@ -441,8 +443,6 @@ namespace PoezdaP {
             this.relationFK_User_Profile = this.Relations["FK_User_Profile"];
             this.relationFK_ticketDesc_Dolhnost = this.Relations["FK_ticketDesc_Dolhnost"];
             this.relationFK_Ticket_Desc_Dolhnost = this.Relations["FK_Ticket_Desc_Dolhnost"];
-            this.relationFK_basket_ticket = this.Relations["FK_basket_ticket"];
-            this.relationFK_basket_Profile = this.Relations["FK_basket_Profile"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -473,6 +473,14 @@ namespace PoezdaP {
             base.Tables.Add(this.tableticketDesc);
             this.tableUser = new UserDataTable();
             base.Tables.Add(this.tableUser);
+            this.relationFK_basket_Profile = new global::System.Data.DataRelation("FK_basket_Profile", new global::System.Data.DataColumn[] {
+                        this.tableProfile.id_profileColumn}, new global::System.Data.DataColumn[] {
+                        this.tablebasket.id_profileColumn}, false);
+            this.Relations.Add(this.relationFK_basket_Profile);
+            this.relationFK_basket_ticket = new global::System.Data.DataRelation("FK_basket_ticket", new global::System.Data.DataColumn[] {
+                        this.tableticket.id_ticketColumn}, new global::System.Data.DataColumn[] {
+                        this.tablebasket.id_ticketColumn}, false);
+            this.Relations.Add(this.relationFK_basket_ticket);
             this.relationFK_check_Profile = new global::System.Data.DataRelation("FK_check_Profile", new global::System.Data.DataColumn[] {
                         this.tableProfile.id_profileColumn}, new global::System.Data.DataColumn[] {
                         this.tablecheck.id_profileColumn}, false);
@@ -509,14 +517,6 @@ namespace PoezdaP {
                         this.tableDolhnost.id_dolhnostColumn}, new global::System.Data.DataColumn[] {
                         this.tableTicket_Desc.id_dolhnostColumn}, false);
             this.Relations.Add(this.relationFK_Ticket_Desc_Dolhnost);
-            this.relationFK_basket_ticket = new global::System.Data.DataRelation("FK_basket_ticket", new global::System.Data.DataColumn[] {
-                        this.tableticket.id_ticketColumn}, new global::System.Data.DataColumn[] {
-                        this.tablebasket.id_ticketColumn}, false);
-            this.Relations.Add(this.relationFK_basket_ticket);
-            this.relationFK_basket_Profile = new global::System.Data.DataRelation("FK_basket_Profile", new global::System.Data.DataColumn[] {
-                        this.tableProfile.id_profileColumn}, new global::System.Data.DataColumn[] {
-                        this.tablebasket.id_profileColumn}, false);
-            this.Relations.Add(this.relationFK_basket_Profile);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -675,6 +675,12 @@ namespace PoezdaP {
             
             private global::System.Data.DataColumn columnid_ticket;
             
+            private global::System.Data.DataColumn columnName;
+            
+            private global::System.Data.DataColumn columnCost;
+            
+            private global::System.Data.DataColumn columnColich;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public basketDataTable() {
@@ -726,6 +732,30 @@ namespace PoezdaP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NameColumn {
+                get {
+                    return this.columnName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CostColumn {
+                get {
+                    return this.columnCost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ColichColumn {
+                get {
+                    return this.columnColich;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -761,11 +791,14 @@ namespace PoezdaP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public basketRow AddbasketRow(ProfileRow parentProfileRowByFK_basket_Profile, ticketRow parentticketRowByFK_basket_ticket) {
+            public basketRow AddbasketRow(ProfileRow parentProfileRowByFK_basket_Profile, ticketRow parentticketRowByFK_basket_ticket, string Name, int Cost, int Colich) {
                 basketRow rowbasketRow = ((basketRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        null};
+                        null,
+                        Name,
+                        Cost,
+                        Colich};
                 if ((parentProfileRowByFK_basket_Profile != null)) {
                     columnValuesArray[0] = parentProfileRowByFK_basket_Profile[0];
                 }
@@ -796,6 +829,9 @@ namespace PoezdaP {
             internal void InitVars() {
                 this.columnid_profile = base.Columns["id_profile"];
                 this.columnid_ticket = base.Columns["id_ticket"];
+                this.columnName = base.Columns["Name"];
+                this.columnCost = base.Columns["Cost"];
+                this.columnColich = base.Columns["Colich"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -805,8 +841,18 @@ namespace PoezdaP {
                 base.Columns.Add(this.columnid_profile);
                 this.columnid_ticket = new global::System.Data.DataColumn("id_ticket", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_ticket);
+                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnName);
+                this.columnCost = new global::System.Data.DataColumn("Cost", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCost);
+                this.columnColich = new global::System.Data.DataColumn("Colich", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnColich);
                 this.columnid_profile.AllowDBNull = false;
                 this.columnid_ticket.AllowDBNull = false;
+                this.columnName.AllowDBNull = false;
+                this.columnName.MaxLength = 50;
+                this.columnCost.AllowDBNull = false;
+                this.columnColich.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3617,12 +3663,34 @@ namespace PoezdaP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public ticketRow ticketRow {
+            public string Name {
                 get {
-                    return ((ticketRow)(this.GetParentRow(this.Table.ParentRelations["FK_basket_ticket"])));
+                    return ((string)(this[this.tablebasket.NameColumn]));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_basket_ticket"]);
+                    this[this.tablebasket.NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int Cost {
+                get {
+                    return ((int)(this[this.tablebasket.CostColumn]));
+                }
+                set {
+                    this[this.tablebasket.CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int Colich {
+                get {
+                    return ((int)(this[this.tablebasket.ColichColumn]));
+                }
+                set {
+                    this[this.tablebasket.ColichColumn] = value;
                 }
             }
             
@@ -3634,6 +3702,17 @@ namespace PoezdaP {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_basket_Profile"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public ticketRow ticketRow {
+                get {
+                    return ((ticketRow)(this.GetParentRow(this.Table.ParentRelations["FK_basket_ticket"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_basket_ticket"]);
                 }
             }
         }
@@ -3967,6 +4046,17 @@ namespace PoezdaP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public basketRow[] GetbasketRows() {
+                if ((this.Table.ChildRelations["FK_basket_Profile"] == null)) {
+                    return new basketRow[0];
+                }
+                else {
+                    return ((basketRow[])(base.GetChildRows(this.Table.ChildRelations["FK_basket_Profile"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public checkRow[] GetcheckRows() {
                 if ((this.Table.ChildRelations["FK_check_Profile"] == null)) {
                     return new checkRow[0];
@@ -4006,17 +4096,6 @@ namespace PoezdaP {
                 }
                 else {
                     return ((UserRow[])(base.GetChildRows(this.Table.ChildRelations["FK_User_Profile"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public basketRow[] GetbasketRows() {
-                if ((this.Table.ChildRelations["FK_basket_Profile"] == null)) {
-                    return new basketRow[0];
-                }
-                else {
-                    return ((basketRow[])(base.GetChildRows(this.Table.ChildRelations["FK_basket_Profile"])));
                 }
             }
         }
@@ -4109,6 +4188,17 @@ namespace PoezdaP {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public basketRow[] GetbasketRows() {
+                if ((this.Table.ChildRelations["FK_basket_ticket"] == null)) {
+                    return new basketRow[0];
+                }
+                else {
+                    return ((basketRow[])(base.GetChildRows(this.Table.ChildRelations["FK_basket_ticket"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public Ticket_DescRow[] GetTicket_DescRows() {
                 if ((this.Table.ChildRelations["FK_Ticket_Desc_ticket"] == null)) {
                     return new Ticket_DescRow[0];
@@ -4126,17 +4216,6 @@ namespace PoezdaP {
                 }
                 else {
                     return ((ticketDescRow[])(base.GetChildRows(this.Table.ChildRelations["FK_ticketDesc_ticket"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public basketRow[] GetbasketRows() {
-                if ((this.Table.ChildRelations["FK_basket_ticket"] == null)) {
-                    return new basketRow[0];
-                }
-                else {
-                    return ((basketRow[])(base.GetChildRows(this.Table.ChildRelations["FK_basket_ticket"])));
                 }
             }
         }
@@ -4886,14 +4965,20 @@ namespace PoezdaP.RZDDataSetTableAdapters {
             tableMapping.DataSetTable = "basket";
             tableMapping.ColumnMappings.Add("id_profile", "id_profile");
             tableMapping.ColumnMappings.Add("id_ticket", "id_ticket");
+            tableMapping.ColumnMappings.Add("Name", "Name");
+            tableMapping.ColumnMappings.Add("Cost", "Cost");
+            tableMapping.ColumnMappings.Add("Colich", "Colich");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[basket] ([id_profile], [id_ticket]) VALUES (@id_profile, @id_t" +
-                "icket)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [basket] ([id_profile], [id_ticket], [Name], [Cost], [Colich]) VALUES" +
+                " (@id_profile, @id_ticket, @Name, @Cost, @Colich)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_profile", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_profile", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_ticket", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_ticket", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Cost", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cost", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Colich", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Colich", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4909,15 +4994,18 @@ namespace PoezdaP.RZDDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id_profile, id_ticket FROM dbo.basket";
+            this._commandCollection[0].CommandText = "SELECT id_profile, id_ticket, Name, Cost, Colich\r\nFROM     basket";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "INSERT INTO [dbo].[basket] ([id_profile], [id_ticket]) VALUES (@id_profile, @id_t" +
-                "icket)";
+            this._commandCollection[1].CommandText = "INSERT INTO [basket] ([id_profile], [id_ticket], [Name], [Cost], [Colich]) VALUES" +
+                " (@id_profile, @id_ticket, @Name, @Cost, @Colich)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_profile", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id_profile", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id_ticket", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id_ticket", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Cost", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Cost", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Colich", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Colich", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4976,34 +5064,19 @@ namespace PoezdaP.RZDDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int id_profile, int id_ticket) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(id_profile));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(id_ticket));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertQuery(int id_profile, int id_ticket) {
+        public virtual int InsertQuery(int id_profile, int id_ticket, string Name, int Cost, int Colich) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             command.Parameters[0].Value = ((int)(id_profile));
             command.Parameters[1].Value = ((int)(id_ticket));
+            if ((Name == null)) {
+                throw new global::System.ArgumentNullException("Name");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(Name));
+            }
+            command.Parameters[3].Value = ((int)(Cost));
+            command.Parameters[4].Value = ((int)(Colich));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8342,6 +8415,15 @@ SELECT id_ticket, Name, type, Description, Cost FROM ticket WHERE (id_ticket = @
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._basketTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.basket.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._basketTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._date_ProfileTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Date_Profile.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -8387,15 +8469,6 @@ SELECT id_ticket, Name, type, Description, Cost FROM ticket WHERE (id_ticket = @
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._basketTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.basket.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._basketTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             return result;
         }
         
@@ -8435,6 +8508,14 @@ SELECT id_ticket, Name, type, Description, Cost FROM ticket WHERE (id_ticket = @
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._ticketTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._basketTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.basket.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._basketTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -8478,14 +8559,6 @@ SELECT id_ticket, Name, type, Description, Cost FROM ticket WHERE (id_ticket = @
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._basketTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.basket.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._basketTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -8496,14 +8569,6 @@ SELECT id_ticket, Name, type, Description, Cost FROM ticket WHERE (id_ticket = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(RZDDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._basketTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.basket.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._basketTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._userTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.User.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -8541,6 +8606,14 @@ SELECT id_ticket, Name, type, Description, Cost FROM ticket WHERE (id_ticket = @
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._date_ProfileTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._basketTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.basket.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._basketTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

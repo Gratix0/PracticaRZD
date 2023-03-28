@@ -50,11 +50,22 @@ namespace PoezdaP
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            object id = (TableGrid.SelectedItem as DataRowView).Row[0];
-            object name = (TableGrid.SelectedItem as DataRowView).Row[1];
-            object id_profile = 2;
-            basket.InsertQuery(Convert.ToInt32(id_profile), Convert.ToInt32(id));
-        }
+            try
+            {
+
+                object cvo = NameDolhTB.Text;
+                object id = (TableGrid.SelectedItem as DataRowView).Row[1];
+                object name = (TableGrid.SelectedItem as DataRowView).Row[2];
+                object cost = (TableGrid.SelectedItem as DataRowView).Row[3];
+                object id_profile = 2;
+
+                basket.InsertQuery(Convert.ToInt32(id_profile), Convert.ToInt32(id), Convert.ToString(name), Convert.ToInt32(cost), Convert.ToInt32(cvo));
+            }
+            catch
+            {
+                MessageBox.Show("Некорректные данные");
+            }
+            }
 
         private void Chek_Click(object sender, RoutedEventArgs e)
         {
