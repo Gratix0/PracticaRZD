@@ -35,7 +35,7 @@ namespace PoezdaP
 
         private void BuyingTick_Click(object sender, RoutedEventArgs e)
         {
-
+            MyFrame2.Content = new Page5();
         }
 
         private void Korzina_Click(object sender, RoutedEventArgs e)
@@ -45,6 +45,7 @@ namespace PoezdaP
 
         private void History_Click(object sender, RoutedEventArgs e)
         {
+            MyFrame2.Content = new Page8();
 
         }
 
@@ -53,10 +54,10 @@ namespace PoezdaP
             try
             {
 
-                object cvo = NameDolhTB.Text;
-                object id = (TableGrid.SelectedItem as DataRowView).Row[1];
-                object name = (TableGrid.SelectedItem as DataRowView).Row[2];
-                object cost = (TableGrid.SelectedItem as DataRowView).Row[3];
+                object cvo = 1;
+                object id = (TableGrid.SelectedItem as DataRowView).Row[0];
+                object name = (TableGrid.SelectedItem as DataRowView).Row[1];
+                object cost = (TableGrid.SelectedItem as DataRowView).Row[4];
                 object id_profile = 2;
 
                 basket.InsertQuery(Convert.ToInt32(id_profile), Convert.ToInt32(id), Convert.ToString(name), Convert.ToInt32(cost), Convert.ToInt32(cvo));
@@ -69,7 +70,7 @@ namespace PoezdaP
 
         private void Chek_Click(object sender, RoutedEventArgs e)
         {
-
+            MyFrame2.Content = new Page7();
         }
     }
 }

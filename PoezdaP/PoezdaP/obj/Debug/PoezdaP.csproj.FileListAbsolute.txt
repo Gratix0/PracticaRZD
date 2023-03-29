@@ -38,3 +38,9 @@ C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page4.g.cs
 C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page4.baml
 C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page5.g.cs
 C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page5.baml
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page6.g.cs
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page6.baml
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page7.g.cs
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page7.baml
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page8.g.cs
+C:\Users\Александр\source\repos\PoezdaP\PoezdaP\obj\Debug\Page8.baml

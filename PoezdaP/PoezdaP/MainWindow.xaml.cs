@@ -31,6 +31,7 @@ namespace PoezdaP
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var allLogin = User.GetData().Rows;
+            bool flag = false;
 
             if (LoginBox.Text.Length < 3)
             {
@@ -42,30 +43,47 @@ namespace PoezdaP
                 PasswordBox.ToolTip = "Ошибка!";
                 PasswordBox.Background = Brushes.DarkRed;
             }
-
-            for (int i = 0; i < allLogin.Count; i++) {
-                if (allLogin[i][1].ToString() == LoginBox.Text &&
-                    allLogin[i][2].ToString() == PasswordBox.Password)
+            try
+            {
+                for (int i = 0; i < allLogin.Count; i++)
                 {
-                    int role = (int)allLogin[i][3];
-
-                    switch (role)
+                    if (allLogin[i][1].ToString() == LoginBox.Text &&
+                        allLogin[i][2].ToString() == PasswordBox.Password)
                     {
-                        case 1:
-                            Window1 rolen = new Window1();
-                            MainWindow main = new MainWindow();
-                            main.Close();
-                            rolen.Show();
-                            break;
+                        int role = (int)allLogin[i][3];
 
-                        case 2:
-                            Window2 win2 = new Window2();
-                            MainWindow mainn = new MainWindow();
-                            mainn.Close();
-                            win2.Show();
-                            break;
+                        switch (role)
+                        {
+                            case 1:
+                                Window1 rolen = new Window1();
+                                MainWindow main = new MainWindow();
+                                main.Close();
+                                rolen.Show();
+                                flag = true;
+                                break;
+
+                            case 2:
+                                Window2 win2 = new Window2();
+                                MainWindow mainn = new MainWindow();
+                                mainn.Close();
+                                win2.Show();
+                                flag = true;
+                                break;
+                        }
+                        
+                        
+                        break;
                     }
+
                 }
+                if (flag == false)
+                {
+                    MessageBox.Show("Ошибка");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         
